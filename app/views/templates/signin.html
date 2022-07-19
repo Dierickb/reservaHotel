@@ -34,13 +34,16 @@
                                        class="form-control"
                                        autocapitalize="off" autocorrect="off"
                                        autocomplete="username"
-                                       autofocus="autofocus" required>
+                                       autofocus="autofocus" required
+                                       oninvalid="this.setCustomValidity('Input username')"
+                                       oninput="this.setCustomValidity('')">
                             </div>
                             <div class="password">
                                 <label for="password">Password</label>
                                 <input type="password" id="password" name="password"
                                        class="form-control" autocomplete="current-password"
-                                       required>
+                                       required oninvalid="this.setCustomValidity('Input password')"
+                                       oninput="this.setCustomValidity('')">
                                 <a href="" class="label-link" tabindex="0">Forgot password?</a>
                                 <button type="submit" form="login" id="btLoginBusiness"
                                     class="submit-btn">
