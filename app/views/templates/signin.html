@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="cardContent no-pa-l">
-                        <form id="login">
+                        <form id="login"  method="POST" action="{{ url_for('api.loginPost') }}">
                            <div class="username">
                                 <label for="login_field">Username or email address</label>
                                 <input type="text" id="login_field" name="login"
@@ -45,12 +45,10 @@
                                        required oninvalid="this.setCustomValidity('Input password')"
                                        oninput="this.setCustomValidity('')">
                                 <a href="" class="label-link" tabindex="0">Forgot password?</a>
-                                <button type="submit" form="login" id="btLoginBusiness"
-                                    class="submit-btn">
+                                <button type="submit" form="login" class="submit-btn">
                                     Submit
                                 </button>
                                 <a href=""><label class="register">Register</label></a>
-
                             </div>
                         </form>
                     </div>
@@ -59,5 +57,6 @@
             </div>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='js/signin.js') }}"></script>
 </body>
 </html>

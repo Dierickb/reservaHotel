@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for
+from ..models.models import Login
 
-global_scope = Blueprint("views", __name__)
+global_scope = Blueprint("api", __name__)
 
 nav = [
     {"name": "Listar Todos", "url": "/api/contacts"},
@@ -20,9 +21,16 @@ def home():
 
 
 @global_scope.route("/signin", methods=['GET'])
-def login():
+def loginGet():
     parameters = {
         "title": "Sign-in",
         "description": "This is the page where user can login to the webpage"
     }
     return render_template("signin.html", nav=nav, **parameters)
+
+
+@global_scope.route("/signin", methods=['POST'])
+def loginPost():
+    data = request.form
+    user = Login(nickName=data["login"], password=data["password"])
+    return jsonify(user)
