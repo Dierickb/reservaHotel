@@ -17,3 +17,12 @@ def home():
                   }
 
     return render_template("home.html", nav=nav, **parameters)
+
+
+@global_scope.route("/signin", methods=['GET'])
+def login():
+    parameters = {
+        "title": "Sign-in",
+        "description": "This is the page where user can login to the webpage"
+    }
+    return render_template("signin.html", nav=nav, **parameters)

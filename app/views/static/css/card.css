@@ -1,0 +1,167 @@
+.carouselContainer {
+  margin: 20px auto;
+  align-items: center;
+  vertical-align: middle;
+  width: auto;
+  max-width: 90vw;
+}
+.carouselContainer.signin {
+  max-width: 464px;
+}
+.cardBox {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  grid-gap: 20px;
+}
+.cardBox .card {
+  height: 70.8vh;
+  position: relative;
+  background-color: #fefffa;
+  padding: 2.7vh 4vw 2.7vh 4vw;
+}
+.cardBox .card .numbers {
+  position: relative;
+  font-size: 2em;
+  font-weight: 500;
+}
+.cardBox .card .cardName {
+  color: #999;
+  font-size: 2em;
+  font-weight: 500;
+}
+.cardBox .card .cardName.txt-black {
+  color: black;
+}
+.cardBox .card .iconBox {
+  font-size: 2.5em;
+  color: #03a9f4;
+}
+.card {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 15px 15px 15px 15px;
+  background-color: white;
+}
+.card .cardTitle {
+  padding-left: 4vw;
+  display: flex;
+}
+.card .cardContent {
+  overflow-y: auto;
+  padding: 4vh 0 0 4vw;
+  margin-bottom: 2vh;
+
+}
+.card.cardContain {
+  width: 100%;
+}
+.carousel-control-prev-icon {
+  background-color: #03a9f4;
+}
+.carousel-control-next-icon {
+  background-color: #03a9f4;
+}
+.carousel-control-prev {
+  width: auto;
+  padding: 20px 0 20px 0;
+}
+.carousel-control-next {
+  width: auto;
+  padding: 20px 0 20px 0;
+}
+.allWidth {
+  width: 100%;
+}
+.titleDimension {
+  text-decoration: underline;
+}
+form .username label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 400;
+  text-align: left;
+}
+form .username .form-control {
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 6px;
+  width: 100%;
+  border: 1px solid #93939e;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+form .password {
+  position: relative !important;
+}
+form .password label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 400;
+  text-align: left;
+}
+form .password .label-link {
+  float: right;
+  font-size: 12px;
+  right: 0 !important;
+  top: 0 !important;
+  position: absolute !important;
+}
+form .password .form-control {
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 6px;
+  transition-property: color,background-color,box-shadow,border-color;
+  width: 100%;
+  border: 1px solid #93939e;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+form .password .register {
+  font-size: 12px;
+  cursor: pointer;
+}
+form .password a {
+  text-decoration: none;
+}
+.form-control:focus, form-select {
+    border-color: var(--color-accent-fg);
+    background-color: rgba(155, 162, 234, 0.38);
+    outline: none;
+    box-shadow: inset 0 0 0 1px var(--color-accent-fg);
+}
+.nr-b {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.nr-t {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.np-b {
+  padding-bottom: 0;
+}
+.np-t {
+  padding-top: 0;
+}
+.nmg-b {
+  margin-bottom: 0;
+}
+.nmg-t {
+  margin-top: 0;
+}
+.chg-b {
+  height: 11vh;
+}
+.cardBox .card.chg-b{
+  height: 11vh;
+}
+.cardContent.no-pa-r {
+  padding-right: 0;
+}
+.cardContent.no-pa-l {
+  padding-left: 0;
+}
