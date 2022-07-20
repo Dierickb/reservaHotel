@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 from ..models.models import Login
+from ..controller import signin_controller
 
 global_scope = Blueprint("api", __name__)
 
@@ -33,4 +34,5 @@ def loginGet():
 def loginPost():
     data = request.form
     user = Login(nickName=data["login"], password=data["password"])
-    return jsonify(user)
+    user_new = signin_controller.validateUser(user)
+    return jsonify(user_new)
