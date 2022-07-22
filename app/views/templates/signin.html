@@ -10,8 +10,10 @@
 
     <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/card.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/navBar.css') }}" rel="stylesheet" />
 </head>
 <body>
+    {% include 'layouts/navigation.html' %}
     <div class="bodyContent">
         <div class="carouselContainer signin">
             <div class="cardBox">
@@ -48,7 +50,7 @@
                                 <button type="submit" form="login" class="submit-btn">
                                     Submit
                                 </button>
-                                <a href=""><label class="register">Register</label></a>
+                                <a href="/signup"><label class="register">Register</label></a>
                             </div>
                         </form>
                     </div>

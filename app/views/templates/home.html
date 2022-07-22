@@ -1,8 +1,14 @@
-{% extends 'layout.html' %}
+{% extends 'index.html' %}
 
 {% block content %}
 <div class="container">
     <h1>{{title}}</h1>
     <p>{{description}}</p>
+
+    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: max-content">
+        <i class="fa-solid fa-calendar"></i>&nbsp;
+        <span></span>
+        <i class="fa fa-caret-down"></i>
+    </div>
 </div>
 {% endblock %}
