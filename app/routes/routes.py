@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for
-from ..models.models import Login
+from ..models.models import Login, Date
 from ..controller import signin_controller
+from datetime import datetime
 
 global_scope = Blueprint("api", __name__)
 
@@ -20,6 +21,12 @@ def home():
 
     return render_template("home.html", nav=nav, **parameters)
 
+
+@global_scope.route("/", methods=['POST'])
+def homePost():
+    data = request.form
+    date = Date(initDate=data["dateInit"], finalDate=data["dateFinal"])
+    return jsonify(date)
 
 @global_scope.route("/signin", methods=['GET'])
 def loginGet():

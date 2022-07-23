@@ -5,10 +5,20 @@
     <h1>{{title}}</h1>
     <p>{{description}}</p>
 
-    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: max-content">
-        <i class="fa-solid fa-calendar"></i>&nbsp;
-        <span></span>
-        <i class="fa fa-caret-down"></i>
+    <div class="dateRange" style="display: flex;">
+        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: max-content">
+            <i class="fa-solid fa-calendar"></i>&nbsp;
+            Deperture
+            <span id="initialDatePicked"></span>
+            return
+            <span id="finalDatePicked"></span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+        <button type="submit" form="home">Search</button>
     </div>
+    <form id="home"  method="POST" action="{{ url_for('api.homePost') }}">
+        <input id="dateInit" name="dateInit" type="text" readonly style="visibility: hidden">
+        <input id="dateFinal" name="dateFinal" type="text" readonly style="visibility: hidden">
+    </form>
 </div>
 {% endblock %}
