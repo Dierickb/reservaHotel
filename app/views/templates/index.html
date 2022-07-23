@@ -7,7 +7,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ title }}</title>
-    {% include 'layouts/head.html' %}
+
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" />
+    {% block css %}{% endblock %}
+    <script src="https://kit.fontawesome.com/e81ff50e3b.js" crossorigin="anonymous"></script>
 </head>
 <body>
     {% include 'layouts/navigation.html' %}

@@ -5,8 +5,8 @@ from ..models.exceptions import UserNotValid
 
 
 def validate_Login(user: Login) -> None:
-    if not __nickName_is_valid(user.nickName):
-        raise UserNotValid(f"The nickName: {user.nickName} is not valid")
+    if not __email_is_valid(user.email):
+        raise UserNotValid(f"The email: {user.email} is not valid")
 
     if not __password_is_valid(user.password):
         raise UserNotValid("The password is not valid")
@@ -14,20 +14,19 @@ def validate_Login(user: Login) -> None:
 
 def format_user(user: Login) -> Login:
     user_dict = user._asdict()
-    user_dict["nickName"] = user.nickName.capitalize()
+    user_dict["email"] = user.email.capitalize()
     user_dict["password"] = user.password.capitalize()
 
     return Login(**user_dict)
 
 
-def __nickName_is_valid(nickName: str) -> bool:
-    if not isinstance(nickName, str):
+def __email_is_valid(email: str) -> bool:
+    if not isinstance(email, str):
         return False
 
-    # regex = r'^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
-    regex = r'^(\w|\.|\_|\-)'
+    regex = r'^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
 
-    return bool(re.search(regex, nickName))
+    return bool(re.search(regex, email))
 
 
 def __password_is_valid(password: str) -> bool:
