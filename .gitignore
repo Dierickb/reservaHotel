@@ -1,3 +1,4 @@
 .idea
 .env
 __pycache__
+database/hotel_book.db

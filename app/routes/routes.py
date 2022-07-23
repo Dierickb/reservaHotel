@@ -28,6 +28,7 @@ def homePost():
     date = Date(initDate=data["dateInit"], finalDate=data["dateFinal"])
     return jsonify(date)
 
+
 @global_scope.route("/signin", methods=['GET'])
 def loginGet():
     parameters = {
@@ -40,6 +41,6 @@ def loginGet():
 @global_scope.route("/signin", methods=['POST'])
 def loginPost():
     data = request.form
-    user = Login(nickName=data["login"], password=data["password"])
+    user = Login(email=data["login"], password=data["password"])
     user_new = signin_controller.validateUser(user)
     return jsonify(user_new)
