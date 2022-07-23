@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for
-from ..models.models import Login, Date
+from ..models.models import Login, Date, User
 from ..controller import signin_controller
 from datetime import datetime
 
@@ -53,3 +53,15 @@ def signupGet():
         "description": "In this page the users gonna be registered"
     }
     return render_template("register/signup.html", nav=nav, **parameters)
+
+
+@global_scope.route("/signup", methods=['POST'])
+def signupPost():
+    data = request.form
+    user = User(email=data["email"], password=data["password"], 
+                fullName=data["fullName"], phone=data["phone"], 
+                address=data["address"])
+
+    user_new = signin_controller.validateUser(user)
+    return jsonify(user_new)
+

@@ -10,3 +10,11 @@ class Login(NamedTuple):
 class Date(NamedTuple):
     initDate: Optional[datetime.date] = None
     finalDate: Optional[str] = None
+
+
+class User(NamedTuple):
+    email: Optional[str] = None
+    password: Optional[str] = None
+    fullName: Optional[str] = None
+    phone: Optional[int] = None
+    address: Optional[str] = None

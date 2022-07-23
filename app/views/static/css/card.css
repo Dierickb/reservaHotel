@@ -23,6 +23,10 @@
 .cardBox .card.login {
   height: 54vh;
 }
+.cardBox .card.signup {
+  height: auto;
+  max-height: 68vh;
+}
 .cardBox .card .numbers {
   position: relative;
   font-size: 2em;
@@ -130,6 +134,22 @@ form .password .register {
 form .password a {
   text-decoration: none;
 }
+form .genericInput label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 400;
+  text-align: left;
+}
+form .genericInput .form-control {
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 6px;
+  width: 100%;
+  border: 1px solid #93939e;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
 .form-control:focus, form-select {
     border-color: var(--color-accent-fg);
     background-color: rgba(155, 162, 234, 0.38);
@@ -167,4 +187,10 @@ form .password a {
 }
 .cardContent.no-pa-l {
   padding-left: 0;
+}
+.ovrflow-y {
+  overflow-y: auto;
+}
+.hg-auto {
+      height: auto;
 }
