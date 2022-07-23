@@ -44,3 +44,12 @@ def loginPost():
     user = Login(email=data["login"], password=data["password"])
     user_new = signin_controller.validateUser(user)
     return jsonify(user_new)
+
+
+@global_scope.route("/signup", methods=['GET'])
+def signupGet():
+    parameters = {
+        "title": "Sign-up",
+        "description": "In this page the users gonna be registered"
+    }
+    return render_template("register/signup.html", nav=nav, **parameters)
