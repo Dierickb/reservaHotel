@@ -1,6 +1,6 @@
 from flask import Flask
 from config import Config
-# from .databse.contact_db import reset_tabl
+from .database.users_db import reset_table
 
 from .routes import global_scope  # , api_scope, errors_scope
 
@@ -11,4 +11,4 @@ app.register_blueprint(global_scope, url_prefix="/")
 # app.register_blueprint(errors_scope, url_prefix="/")
 # app.register_blueprint(api_scope, url_prefix="/api")
 
-#reset_table()
+reset_table()
