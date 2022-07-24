@@ -13,8 +13,9 @@ class Date(NamedTuple):
 
 
 class User(NamedTuple):
+    id: Optional[str] = None
     email: Optional[str] = None
     password: Optional[str] = None
     fullName: Optional[str] = None
-    phone: Optional[int] = None
+    phone: Optional[str] = None
     address: Optional[str] = None
