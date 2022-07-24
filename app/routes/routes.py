@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, jsonify
 from ..models.models import Login, Date, User
-from ..controller import signin_controller
-from datetime import datetime
+from ..controller import users_controller
 
 global_scope = Blueprint("api", __name__)
 
@@ -42,7 +41,7 @@ def loginGet():
 def loginPost():
     data = request.form
     user = Login(email=data["login"], password=data["password"])
-    user_new = signin_controller.validateUser(user)
+    user_new = users_controller.validateLogin(user)
     return jsonify(user_new)
 
 
@@ -58,10 +57,18 @@ def signupGet():
 @global_scope.route("/signup", methods=['POST'])
 def signupPost():
     data = request.form
-    user = User(email=data["email"], password=data["password"], 
-                fullName=data["fullName"], phone=data["phone"], 
+    user = User(email=data["email"], password=data["password"],
+                fullName=data["fullName"], phone=data["phone"],
                 address=data["address"])
 
-    user_new = signin_controller.validateUser(user)
+    user_new = users_controller.create(user)
     return jsonify(user_new)
 
+
+@global_scope.route("/users", methods=['GET'])
+def getUsers():
+    users_list = users_controller.lists()
+
+    users_dict = [user._asdict() for user in users_list]
+
+    return jsonify(users_dict)
