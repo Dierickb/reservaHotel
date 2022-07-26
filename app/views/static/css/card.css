@@ -101,12 +101,15 @@
   text-decoration: underline;
 }
 .ul-footer {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
+  padding-left: 0;
 }
 .ul-footer li {
   margin: auto;
   width: 50%;
+  padding-left: 3vw;
 }
 form .username label {
   display: block;
