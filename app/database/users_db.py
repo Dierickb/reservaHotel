@@ -82,8 +82,8 @@ def validateUser(field: str, value: str) -> bool:
 
     record = _fetch_one(query, parameters)
 
-    if not bool(record):
-        raise UserNotFound(f"User with email {value} was not found")
+    if bool(record):
+        raise UserNotFound(f"User with email {value} was found")
 
     return bool(record)
 
