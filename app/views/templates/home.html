@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container" style="display: none">
     <h1>{{title}}</h1>
     <p>{{description}}</p>
 
@@ -31,5 +31,45 @@
         <input id="dateInit" name="dateInit" type="text" readonly style="visibility: hidden">
         <input id="dateFinal" name="dateFinal" type="text" readonly style="visibility: hidden">
     </form>
+</div>
+
+<div class="bodyContent allWidth np-t">
+    <div class="carouselContainer allWidth">
+        <div class="cardBox">
+            <div class="card ovrflow-y whole-display">
+
+                <div class="cardTitle">
+                    <div class="cardName txt-black">
+                        Sistema de reservas de habitaciones en línea
+                    </div>
+                </div>
+
+                <div class="cardContent no-pa-l allWidth inline-flex">
+                    <div class="cardSubContent">
+                        <img class="image" src="https://static.abc.es/Media/201504/27/hotel12--644x362.jpg" alt="">
+                    </div>
+
+                    <div class="cardSubContent">
+                        <img class="image" src="https://www.hotelcapital.com.co/uploads/galeriahabitaciones/GHL-Capital-acomodacion-estandar.jpg" alt="">
+                    </div>
+                </div>
+
+
+                <div class="card_footer">
+                    <ul class="ul-footer">
+                        <li>Servicio de habitación 24 horas</li>
+                        <li>Atención al cliente personalizada</li>
+                        <li>Servicio de lavanderia las 24/7 horas</li>
+                        <li>Prensa diaria solicitada por el cliente</li>
+                        <li>Servicio de parqueadero privado</li>
+                        <li>Servicio de hidromasajes, SPA, GYM</li>
+                        <li>Internet con cobertura total en todo el hotel</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
