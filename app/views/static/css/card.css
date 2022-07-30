@@ -111,6 +111,12 @@
   width: 50%;
   padding-left: 3vw;
 }
+.card_footer p {
+  text-align: center;
+  color: red;
+  margin: 3.1vh;
+  font-size: x-large;
+}
 form .username label {
   display: block;
   margin-bottom: 8px;
