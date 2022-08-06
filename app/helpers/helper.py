@@ -30,8 +30,8 @@ def validate_user(user: User) -> None:
 
 def format_user(user: User) -> User:
     user_dict = user._asdict()
-    user_dict["email"] = user.email.capitalize()
-    user_dict["password"] = user.password.capitalize()
+    user_dict["email"] = user.email.lower()
+    user_dict["password"] = user.password
 
     return User(**user_dict)
 
