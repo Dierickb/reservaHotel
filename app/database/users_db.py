@@ -23,9 +23,9 @@ def create(user: User) -> User:
 
 def update(user: User) -> User:
     if not validateUser("oid", user.id):
-        raise UserNotFound("Contact not Found!")
+        raise UserNotFound("User not Found!")
 
-    query = """UPDATE contacts SET email = :email, password = :password,
+    query = """UPDATE users SET email = :email, password = :password,
                       fullName = :fullName, phone = :phone, address = :address
                WHERE oid = :oid"""
 
@@ -81,9 +81,6 @@ def validateUser(field: str, value: str) -> bool:
     parameters = [value]
 
     record = _fetch_one(query, parameters)
-
-    if bool(record):
-        raise UserNotFound(f"User with email {value} was found")
 
     return bool(record)
 
