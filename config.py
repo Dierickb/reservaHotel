@@ -14,3 +14,4 @@ class Config:
 
     TEMPLATE_FOLDER = "views/templates/"
     STATIC_FOLDER = "views/static/"
+    SECRET_KEY = os.environ.get("SECRET_KEY", " ")
