@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-from ..models.models import Login, Date, User
+from ..models.models import Login, Date, User, SignUpForm
 from ..controller import users_controller
 
 global_scope = Blueprint("api", __name__)
@@ -47,11 +47,12 @@ def loginPost():
 
 @global_scope.route("/signup", methods=['GET'])
 def signupGet():
+    form = SignUpForm
     parameters = {
         "title": "Sign-up",
         "description": "In this page the users gonna be registered"
     }
-    return render_template("register/signup.html", nav=nav, **parameters)
+    return render_template("register/signup.html", nav=nav, **parameters, form=form)
 
 
 @global_scope.route("/signup", methods=['POST'])
