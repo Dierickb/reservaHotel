@@ -22,7 +22,7 @@ def __get_cursor() -> Iterator[sqlite3.Cursor]:  # Manejador de eventos
         connection.close()
 
 
-def _fetch_one(query: str, parameters: Optional[List[str]] = None) -> Any:
+def _fetch_one(query: str, parameters: Optional[List[str] | Optional[List[int]]] = None ) -> Any:
     if parameters is None:
         parameters = []
 
