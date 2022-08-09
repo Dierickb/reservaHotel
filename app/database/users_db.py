@@ -38,7 +38,7 @@ def update(user: User) -> User:
 
 def delete(user: User) -> User:
     if not validateUser("oid", user.id):
-        raise UserNotFound("Contact not Found!")
+        raise UserNotFound("User not Found!")
 
     query = "DELETE FROM users WHERE oid = ?"
     parameters = [user.id]
