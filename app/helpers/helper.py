@@ -1,3 +1,4 @@
+import os.path
 import re
 
 from ..models.models import Login, User
@@ -60,3 +61,9 @@ def __password_is_valid(password: str) -> bool:
     regex = r'^(\w|\.|\_|\-)'
 
     return bool(re.search(regex, password))
+
+
+def __image_to_binary(imagePath):
+    with open(imagePath, 'rb') as f:
+        blob = f.read()
+    return blob
