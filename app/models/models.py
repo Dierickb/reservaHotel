@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import NamedTuple, Optional
+from typing import NamedTuple, Optional, BinaryIO
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Email, Length, NumberRange, InputRequired
@@ -22,6 +22,17 @@ class User(NamedTuple):
     fullName: Optional[str] = None
     phone: Optional[str] = None
     address: Optional[str] = None
+
+
+class Room(NamedTuple):
+    id: Optional[str] = None
+    cantBathroom: Optional[int] = None
+    guests: Optional[int] = None
+    photo: Optional[BinaryIO] = None
+    typeRoom: Optional[str] = None,
+    possibilities: Optional[int] = None
+    available: Optional[int] = None
+    floor: Optional[int] = None
 
 
 class SignUpForm(FlaskForm):
