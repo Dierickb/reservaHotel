@@ -15,8 +15,8 @@ def validate_Login(user: Login) -> None:
 
 def format_login(user: Login) -> Login:
     user_dict = user._asdict()
-    user_dict["email"] = user.email.capitalize()
-    user_dict["password"] = user.password.capitalize()
+    user_dict["email"] = user.email.lower()
+    user_dict["password"] = user.password
 
     return Login(**user_dict)
 

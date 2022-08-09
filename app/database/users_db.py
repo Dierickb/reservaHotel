@@ -94,7 +94,7 @@ def validateLogin(field: str, value: Login) -> bool:
     if not bool(record):
         raise UserNotFound(f"User with email {value.email} was not found")
 
-    return bool(record)
+    return record
 
 
 def reset_table() -> None:
