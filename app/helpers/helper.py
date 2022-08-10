@@ -55,6 +55,15 @@ def validate_user(user: User) -> None:
     if None in (user.fullName, user.email):
         raise UserNotValid("The user has no full name or email")
 
+    if is_empty(user.password):
+        raise UserNotValid("The user has no full name or email")
+
+    if is_empty(user.phone):
+        raise UserNotValid("The user has no full name or email")
+
+    if is_empty(user.address):
+        raise UserNotValid("The user has no full name or email")
+
 
 def validate_room(room: Room) -> None:
     for clave in room:
