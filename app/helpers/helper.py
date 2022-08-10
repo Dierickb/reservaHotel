@@ -1,8 +1,7 @@
-import os.path
 import re
 
-from ..models.models import Login, User
-from ..models.exceptions import UserNotValid
+from ..models.models import Login, User, Room
+from ..models.exceptions import UserNotValid, RoomNotValid
 
 
 def validate_Login(user: Login) -> None:
@@ -21,14 +20,6 @@ def format_login(user: Login) -> Login:
     return Login(**user_dict)
 
 
-def validate_user(user: User) -> None:
-    if not __email_is_valid(user.email):
-        raise UserNotValid(f"The email address: {user.email} is not valid")
-
-    if None in (user.fullName, user.email):
-        raise UserNotValid("The user has no full name or email")
-
-
 def format_user(user: User) -> User:
     user_dict = user._asdict()
     user_dict["email"] = user.email.lower()
@@ -42,6 +33,33 @@ def format_name(user: User) -> User:
     contact_dict["fullName"] = user.fullName.capitalize()
 
     return User(**contact_dict)
+
+
+def format_room(room: Room) -> Room:
+    room_dict = room._asdict()
+    room_dict["cantBathroom"] = room.cantBathroom
+    room_dict["guests"] = room.guests
+    room_dict["photo"] = room.photo
+    room_dict["typeRoom"] = room.typeRoom
+    room_dict["possibilities"] = room.possibilities
+    room_dict["available"] = room.available
+    room_dict["floor"] = room.floor
+
+    return Room(**room_dict)
+
+
+def validate_user(user: User) -> None:
+    if not __email_is_valid(user.email):
+        raise UserNotValid(f"The email address: {user.email} is not valid")
+
+    if None in (user.fullName, user.email):
+        raise UserNotValid("The user has no full name or email")
+
+
+def validate_room(room: Room) -> None:
+    for clave in room:
+        if room[clave].isEmpty() | len(room[clave]) == 0:
+            raise RoomNotValid(f"The {clave} should not be empty")
 
 
 def __email_is_valid(email: str) -> bool:
