@@ -112,16 +112,16 @@ def validateUpdate(field: str, value: User) -> User:
     if is_empty(value.email):
         value.email = user_db.email
 
-    if is_empty(value.id):
+    if is_empty(value.password):
         value.password = user_db.password
 
-    if is_empty(value.id):
+    if is_empty(value.fullName):
         value.fullName = user_db.fullName
 
-    if is_empty(value.id):
+    if is_empty(value.phone):
         value.phone = user_db.phone
 
-    if is_empty(value.id):
+    if is_empty(value.address):
         value.address = user_db.address
 
     return value
