@@ -1,18 +1,15 @@
 import os
 from typing import List
 
-import faker.providers.file
-
 from .connection import _fetch_all, _fetch_lastrow_id, _fetch_none, _fetch_one
 from ..models.models import Room
-from ..models.exceptions import RoomAlreadyExists, RoomNotFound, RoomNotAvailable, RoomNotValid
+from ..models.exceptions import RoomAlreadyExists, RoomNotFound
 from ..helpers.helper import __image_to_binary
 
 from faker import Faker
 
 
 def create(room: Room) -> Room:
-
     if validateRoom("oid", room.id):
         raise RoomAlreadyExists(f"Room in the floor {room.id} already exist")
 
@@ -28,12 +25,8 @@ def create(room: Room) -> Room:
 
 
 def update(room: Room) -> Room:
-
     if not validateRoom("oid", room.id):
         raise RoomNotFound(f"The room with id {room.id} does not exist")
-
-    query = """INSERT INTO rooms VALUES (:floor, :cantBathroom, :guests, :typeRoom, 
-    :possibilities, :available, :photo)"""
 
     query = """UPDATE rooms SET floor = :floor, cantBathroom = :cantBathroom,
                   guests = :guests, typeRoom = :typeRoom, possibilities = :possibilities, 
@@ -84,14 +77,13 @@ def detail(room: Room) -> Room:
         raise RoomNotFound(f"The room with id {room.id} does not exist")
 
     room = Room(id=record[0], floor=record[1], cantBathroom=record[2],
-                    guests=record[3], typeRoom=record[4], possibilities=record[5],
-                    available=record[6], photo=record[7])
+                guests=record[3], typeRoom=record[4], possibilities=record[5],
+                available=record[6], photo=record[7])
 
     return room
 
 
 def validateRoom(field: str, value: str | int) -> bool:
-
     query = f"SELECT oid FROM rooms WHERE {field}=?"
     parameters = [value]
 
