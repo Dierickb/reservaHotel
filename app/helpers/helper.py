@@ -81,6 +81,10 @@ def __password_is_valid(password: str) -> bool:
     return bool(re.search(regex, password))
 
 
+def is_empty(a):
+    return not a
+
+
 def __image_to_binary(imagePath):
     with open(imagePath, 'rb') as f:
         blob = f.read()
