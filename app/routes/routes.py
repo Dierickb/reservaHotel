@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify
 from ..models.models import Login, Date, User, SignUpForm
 from ..controller import users_controller
+from werkzeug.security import generate_password_hash, check_password_hash
 
 global_scope = Blueprint("api", __name__)
 
@@ -14,7 +15,7 @@ nav = [
 def home():
     """Landing page route."""
 
-    parameters = {"title": "Flask and Jinja Practicial work",
+    parameters = {"title": "Home",
                   "description": "This is a simple page made for implement"
                   }
 
@@ -41,8 +42,14 @@ def loginGet():
 def loginPost():
     data = request.form
     user = Login(email=data["login"], password=data["password"])
+    #user_new no es objeto sino tupla (?)
     user_new = users_controller.validateLogin(user)
-    return jsonify(user_new)
+    if user_new and check_password_hash(user.password, user_new[1]):
+        return jsonify(user_new)
+    else:
+        return render_template("register/signin.html", nav=nav)
+ 
+
 
 
 @global_scope.route("/signup", methods=['GET'])
@@ -58,7 +65,7 @@ def signupGet():
 @global_scope.route("/signup", methods=['POST'])
 def signupPost():
     data = request.form
-    user = User(email=data["email"], password=data["password"],
+    user = User(email=data["email"], password=generate_password_hash(data["password"]),
                 fullName=data["fullName"], phone=data["phone"],
                 address=data["address"])
 
