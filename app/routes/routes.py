@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 from ..models.models import Login, Date, User, SignUpForm
 from ..controller import users_controller
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -44,8 +44,9 @@ def loginPost():
     user = Login(email=data["login"], password=data["password"])
     #user_new no es objeto sino tupla (?)
     user_new = users_controller.validateLogin(user)
-    if user_new and check_password_hash(user.password, user_new[1]):
-        return jsonify(user_new)
+    if check_password_hash(user_new[1],user.password):
+        #la autenticación se puede realizar mediante variables de session
+        return render_template("admin.html", nav=nav)
     else:
         return render_template("register/signin.html", nav=nav)
  

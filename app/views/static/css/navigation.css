@@ -16,11 +16,12 @@
 .nav-link {
   color: white;
   text-decoration: none;
+  height:54px
 }
 .logo {
   font-size: 30px;
   font-weight: bold;
-  padding: 0 40px;
+  padding: 0 5px;
   line-height: 60px;
   display: flex;
 }
