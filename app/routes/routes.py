@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from ..models.models import Login, Date, User, SignUpForm
 from ..controller import users_controller
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -44,14 +44,21 @@ def loginPost():
     user = Login(email=data["login"], password=data["password"])
     #user_new no es objeto sino tupla (?)
     user_new = users_controller.validateLogin(user)
+    #user new debería retornar el rol.
+    rol = "Admin" #user_new[3]
     if check_password_hash(user_new[1],user.password):
         #la autenticación se puede realizar mediante variables de session
-        return render_template("admin.html", nav=nav)
+        session['rol'] = rol
+        if rol == 'Admin':
+            return redirect(url_for('api.admin'))
+        elif rol == 'SuperAdmin':
+            return redirect(url_for('api.admin'))
+        elif rol == 'Cliente':
+            return redirect(url_for('api.admin'))
     else:
+        #El usuario se equivocó de contraseña
         return render_template("register/signin.html", nav=nav)
  
-
-
 
 @global_scope.route("/signup", methods=['GET'])
 def signupGet():
@@ -68,7 +75,7 @@ def signupPost():
     data = request.form
     user = User(email=data["email"], password=generate_password_hash(data["password"]),
                 fullName=data["fullName"], phone=data["phone"],
-                address=data["address"])
+                address=data["address"],rol="Cliente")
 
     user_new = users_controller.create(user)
     return jsonify(user_new)
@@ -81,3 +88,43 @@ def getUsers():
     users_dict = [user._asdict() for user in users_list]
 
     return jsonify(users_dict)
+
+@global_scope.route("/admin", methods=['GET'])
+def admin():
+    if 'rol' in session and session['rol'] == 'Admin':
+        return render_template("admin.html", nav=nav)
+    else:
+        return redirect(url_for('api.loginGet'))
+
+@global_scope.route("/admin/gUser", methods=['GET'])
+def gUser():
+    if 'rol' in session and session['rol'] == 'Admin':
+        return render_template("admin.html", nav=nav)
+    else:
+        return redirect(url_for('api.loginGet'))
+
+@global_scope.route("/admin/gRooms", methods=['GET'])
+def gRooms():
+    if 'rol' in session and session['rol'] == 'Admin':
+        return render_template("admin.html", nav=nav)
+    else:
+        return redirect(url_for('api.loginGet'))
+
+@global_scope.route("/admin/gComments", methods=['GET'])
+def gComments():
+    if 'rol' in session and session['rol'] == 'Admin':
+        return render_template("admin.html", nav=nav)
+    else:
+        return redirect(url_for('api.loginGet'))
+
+@global_scope.route("/admin/gReservation", methods=['GET'])
+def gReservation():
+    if 'rol' in session and session['rol'] == 'Admin':
+        return render_template("admin.html", nav=nav)
+    else:
+        return redirect(url_for('api.loginGet'))
+
+@global_scope.route('/<rol>/logout')
+def logout(rol):
+    session.pop('rol', None)
+    return redirect(url_for('api.loginGet'))

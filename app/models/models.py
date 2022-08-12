@@ -22,6 +22,8 @@ class User(NamedTuple):
     fullName: Optional[str] = None
     phone: Optional[str] = None
     address: Optional[str] = None
+    rol: Optional[str] = None
+
 
 
 class Room(NamedTuple):
