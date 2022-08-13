@@ -25,7 +25,6 @@ class User(NamedTuple):
     rol: Optional[str] = None
 
 
-
 class Room(NamedTuple):
     id: Optional[str] = None
     cantBathroom: Optional[int] = None

@@ -16,10 +16,11 @@ def home():
     """Landing page route."""
 
     parameters = {"title": "Home",
-                  "description": "This is a simple page made for implement"
+                  "description": "This is a simple page made for implement",
+                  "url": request.path
                   }
 
-    return render_template("home.html", nav=nav, **parameters)
+    return render_template("home.html", **parameters)
 
 
 @global_scope.route("/", methods=['POST'])
@@ -33,7 +34,8 @@ def homePost():
 def loginGet():
     parameters = {
         "title": "Sign-in",
-        "description": "This is the page where user can login to the webpage"
+        "description": "This is the page where user can login to the webpage",
+        "url": request.path
     }
     return render_template("register/signin.html", nav=nav, **parameters)
 
@@ -42,12 +44,12 @@ def loginGet():
 def loginPost():
     data = request.form
     user = Login(email=data["login"], password=data["password"])
-    #user_new no es objeto sino tupla (?)
+    # user_new no es objeto sino tupla (?)
     user_new = users_controller.validateLogin(user)
-    #user new debería retornar el rol.
-    rol = "Admin" #user_new[3]
-    if check_password_hash(user_new[1],user.password):
-        #la autenticación se puede realizar mediante variables de session
+    # user new debería retornar el rol.
+    rol = "Admin"  # user_new[3]
+    if check_password_hash(user_new[1], user.password):
+        # la autenticación se puede realizar mediante variables de session
         session['rol'] = rol
         if rol == 'Admin':
             return redirect(url_for('api.admin'))
@@ -56,16 +58,17 @@ def loginPost():
         elif rol == 'Cliente':
             return redirect(url_for('api.admin'))
     else:
-        #El usuario se equivocó de contraseña
+        # El usuario se equivocó de contraseña
         return render_template("register/signin.html", nav=nav)
- 
+
 
 @global_scope.route("/signup", methods=['GET'])
 def signupGet():
     form = SignUpForm
     parameters = {
         "title": "Sign-up",
-        "description": "In this page the users gonna be registered"
+        "description": "In this page the users gonna be registered",
+        "url": request.path
     }
     return render_template("register/signup.html", nav=nav, **parameters, form=form)
 
@@ -75,7 +78,7 @@ def signupPost():
     data = request.form
     user = User(email=data["email"], password=generate_password_hash(data["password"]),
                 fullName=data["fullName"], phone=data["phone"],
-                address=data["address"],rol="Cliente")
+                address=data["address"], rol="Cliente")
 
     user_new = users_controller.create(user)
     return redirect(url_for('api.loginGet'))
@@ -89,12 +92,14 @@ def getUsers():
 
     return jsonify(users_dict)
 
+
 @global_scope.route("/admin", methods=['GET'])
 def admin():
     if 'rol' in session and session['rol'] == 'Admin':
-        return render_template("admin.html", nav=nav)
+        return render_template("admin.html", nav=nav, rol=session['rol'], url=request.path)
     else:
         return redirect(url_for('api.loginGet'))
+
 
 @global_scope.route("/admin/gUser", methods=['GET'])
 def gUser():
@@ -103,12 +108,14 @@ def gUser():
     else:
         return redirect(url_for('api.loginGet'))
 
+
 @global_scope.route("/admin/gRooms", methods=['GET'])
 def gRooms():
     if 'rol' in session and session['rol'] == 'Admin':
         return render_template("admin.html", nav=nav)
     else:
         return redirect(url_for('api.loginGet'))
+
 
 @global_scope.route("/admin/gComments", methods=['GET'])
 def gComments():
@@ -117,12 +124,14 @@ def gComments():
     else:
         return redirect(url_for('api.loginGet'))
 
+
 @global_scope.route("/admin/gReservation", methods=['GET'])
 def gReservation():
     if 'rol' in session and session['rol'] == 'Admin':
         return render_template("admin.html", nav=nav)
     else:
         return redirect(url_for('api.loginGet'))
+
 
 @global_scope.route('/<rol>/logout')
 def logout(rol):

@@ -9,14 +9,24 @@
             &nbsp; Four Seasons Place Kuala Lumpur
         </a>
         <ul class="nav-menu">
-            <li class="nav-menu-item">
-                <a href="/signup" class="nav-menu-link nav-link">
-                    Sign up</a>
-            </li>
-            <li class="nav-menu-item">
-                <a href="/signin" class="nav-menu-link nav-link nav-menu-link_active"
-                  >Sign in</a>
-            </li>
+
+            {% if url == "/" %}
+                <li class="nav-menu-item">
+                    <a href="/signup" class="nav-menu-link nav-link">
+                        Sign up</a>
+                </li>
+                <li class="nav-menu-item">
+                    <a href="/signin" class="nav-menu-link nav-link nav-menu-link_active"
+                      >Sign in</a>
+                </li>
+            {% endif %}
+
+            {% if url == "/admin" %}
+                <li class="nav-menu-item">
+                    <a href="/" class="nav-menu-link nav-link">
+                        Sign out</a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 </header>
