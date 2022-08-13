@@ -17,39 +17,7 @@
 
         <div class="container mainContainer">
 
-            <div class="cardBox quickInfo">
-                <div class="card quickInfo">
-                    <div>
-                        <div class="numbers">95 </div>
-                        <div class="cardName">Total rooms</div>
-                    </div>
-                    <div class="iconBox">
-                        <i class="fas fa-eye" aria-hidden="true"></i>
-                    </div>
-                </div>
-
-                <div class="card quickInfo">
-                    <div>
-                        <div class="numbers" id="numPos">22</div>
-                        <div class="cardName">Rooms used</div>
-                    </div>
-                    <div class="iconBox">
-                        <div class="user">
-                            <i class="fas fa-viruses" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card quickInfo">
-                    <div>
-                        <div class="numbers" id="numNeg">85</div>
-                        <div class="cardName">Total users</div>
-                    </div>
-                    <div class="iconBox">
-                        <i class="fas fa-thin fa-user"></i>
-                    </div>
-                </div>
-            </div>
+            {% include 'admin/userRegister.html' %}
 
             <div class="details">
                 {% include 'admin/userInfo.html' %}
