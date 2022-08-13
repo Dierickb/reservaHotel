@@ -16,44 +16,33 @@
                 <div class="cardContent no-pa-l allWidth inline-flex">
 
                     <div class="cardSubContent">
-                        <div class="buttons">
-                            <a class="button is-primary"  href="{{url_for('api.gUser')}}" style="background-color: #003399">
+                            <a class="select_button nav-menu-link"  href="{{url_for('api.gUser')}}" style="background-color: #0769e9">
                                 Gestor de Usuarios
                             </a>
-                        </div>
                     </div>
 
                     <div class="cardSubContent">
-                        <div class="buttons">
-                            <a class="button is-primary"  href="{{url_for('api.gRooms')}}" style="background-color: #003399">
+                            <a class="select_button nav-menu-link"  href="{{url_for('api.gRooms')}}" style="background-color: #0769e9">
                             Gestor de Habitaciones
                             </a>
-                        </div>
                     </div>
 
                     <div class="cardSubContent">
-                        <div class="buttons">
-                            <a class="button is-primary"  href="{{url_for('api.gReservation')}}" style="background-color: #003399">
+                            <a class="select_button nav-menu-link"  href="{{url_for('api.gReservation')}}">
                                 Gestor de Reservas
-                            </a>
-                        </div>
-                        
+                            </a>                        
                     </div>
 
                     <div class="cardSubContent">
-                        <div class="buttons">
-                            <a class="button is-primary"  href="{{url_for('api.gComments')}}" style="background-color: #003399">
+                            <a class="select_button nav-menu-link"  href="{{url_for('api.gComments')}}" >
                                 Gestor de Comentarios
                             </a>
-                        </div>
                     </div>
 
                     <div class="cardSubContent">
-                        <div class="buttons">
-                            <a class="button is-primary"  href="{{url_for('api.logout', rol=session['rol'])}}" style="background-color: #003399">
+                            <a class="select_button nav-menu-link"  href="{{url_for('api.logout', rol=session['rol'])}}">
                               Log out
                             </a>
-                        </div>
                     </div>
                 </div>
 

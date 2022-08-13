@@ -46,3 +46,11 @@
   background-color: #034574;
   transition: 0.5s;
 }
+
+.select_button:hover,
+.select_button {
+  background-color: #0769e9;
+  color: white;
+  text-decoration: none;
+  height:54px
+}

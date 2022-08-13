@@ -78,7 +78,7 @@ def signupPost():
                 address=data["address"],rol="Cliente")
 
     user_new = users_controller.create(user)
-    return jsonify(user_new)
+    return redirect(url_for('api.loginGet'))
 
 
 @global_scope.route("/users", methods=['GET'])
