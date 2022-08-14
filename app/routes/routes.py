@@ -46,17 +46,18 @@ def loginPost():
     user = Login(email=data["login"], password=data["password"])
     # user_new no es objeto sino tupla (?)
     user_new = users_controller.validateLogin(user)
+    print(user_new)
     # user new debería retornar el rol.
     rol = "Admin"  # user_new[3]
     if check_password_hash(user_new[1], user.password):
         # la autenticación se puede realizar mediante variables de session
         session['rol'] = rol
         if rol == 'Admin':
-            return redirect(url_for('api.admin'))
+            return redirect(url_for('admin.admin'))
         elif rol == 'SuperAdmin':
-            return redirect(url_for('api.admin'))
+            return redirect(url_for('admin.admin'))
         elif rol == 'Cliente':
-            return redirect(url_for('api.admin'))
+            return redirect(url_for('admin.admin'))
     else:
         # El usuario se equivocó de contraseña
         return render_template("register/signin.html", nav=nav)
@@ -93,47 +94,3 @@ def getUsers():
     return jsonify(users_dict)
 
 
-@global_scope.route("/admin", methods=['GET'])
-def admin():
-    if 'rol' in session and session['rol'] == 'Admin':
-        return render_template("admin.html", nav=nav, rol=session['rol'], url=request.path)
-    else:
-        return redirect(url_for('api.loginGet'))
-
-
-@global_scope.route("/admin/gUser", methods=['GET'])
-def gUser():
-    if 'rol' in session and session['rol'] == 'Admin':
-        return render_template("admin.html", nav=nav)
-    else:
-        return redirect(url_for('api.loginGet'))
-
-
-@global_scope.route("/admin/gRooms", methods=['GET'])
-def gRooms():
-    if 'rol' in session and session['rol'] == 'Admin':
-        return render_template("admin.html", nav=nav)
-    else:
-        return redirect(url_for('api.loginGet'))
-
-
-@global_scope.route("/admin/gComments", methods=['GET'])
-def gComments():
-    if 'rol' in session and session['rol'] == 'Admin':
-        return render_template("admin.html", nav=nav)
-    else:
-        return redirect(url_for('api.loginGet'))
-
-
-@global_scope.route("/admin/gReservation", methods=['GET'])
-def gReservation():
-    if 'rol' in session and session['rol'] == 'Admin':
-        return render_template("admin.html", nav=nav)
-    else:
-        return redirect(url_for('api.loginGet'))
-
-
-@global_scope.route('/<rol>/logout')
-def logout(rol):
-    session.pop('rol', None)
-    return redirect(url_for('api.loginGet'))
