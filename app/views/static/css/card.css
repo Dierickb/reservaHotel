@@ -192,6 +192,9 @@
   margin: 3.1vh;
   font-size: x-large;
 }
+.formContainer {
+  padding: 20px;
+}
 form .username label {
   display: block;
   margin-bottom: 8px;

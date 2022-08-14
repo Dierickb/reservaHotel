@@ -14,7 +14,10 @@
     <script src="https://kit.fontawesome.com/e81ff50e3b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    {% include 'layouts/navigation.html' %}
+    {% if url != "/admin/" %}
+        {% include 'layouts/navigation.html' %}
+    {% endif %}
+   
     {% block content %}{% endblock %}
 </body>
 </html>

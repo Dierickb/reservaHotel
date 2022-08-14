@@ -7,6 +7,7 @@ admin_scope = Blueprint("admin", __name__)
 @admin_scope.route("/", methods=['GET'])
 def admin():
     if 'rol' in session and session['rol'] == 'Admin':
+        print(request.path)
         return render_template("/admin/admin.html", rol=session['rol'], url=request.path)
     else:
         return redirect(url_for('api.loginGet'))
