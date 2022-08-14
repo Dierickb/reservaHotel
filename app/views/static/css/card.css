@@ -66,6 +66,7 @@
 }
 .card.cardContain {
   width: 100%;
+    padding: 0;
 }
 .card .card_header{
     width: 100%;
@@ -192,8 +193,46 @@
   margin: 3.1vh;
   font-size: x-large;
 }
+.cardRegisterHeader {
+    position: relative;
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.cardRegister {
+    grid-template-columns: repeat(3, 3fr);
+    position: relative;
+    padding: 0px 20px 20px 20px;
+    display: grid;
+    align-items: center;
+}
+.form {
+    display: none;
+}
+.form.active {
+    transition: 0.5s;
+    display: block;
+}
 .formContainer {
   padding: 20px;
+}
+.form-group {
+    padding: 3px;
+}
+.form-control:focus, .form-select {
+    border-color: var(--color-accent-fg);
+    background-color: rgba(155, 162, 234, 0.38);
+    outline: none;
+    box-shadow: inset 0 0 0 1px var(--color-accent-fg);
+}
+.form-control, .roleDropDown {
+    border-radius: 30px;
+    padding: 10px 10px;
+    z-index: 2000;
+    width: 100%;
+    border: none #fff;
+    background: aliceblue;
 }
 form .username label {
   display: block;
@@ -261,12 +300,6 @@ form .genericInput .form-control {
   margin-top: 4px;
   margin-bottom: 16px;
 }
-.form-control:focus, .form-select {
-    border-color: var(--color-accent-fg);
-    background-color: rgba(155, 162, 234, 0.38);
-    outline: none;
-    box-shadow: inset 0 0 0 1px var(--color-accent-fg);
-}
 .cardContent .cardSubContent {
   padding: 5px 10px 5px 10px;
   width: 50%;
@@ -325,4 +358,16 @@ form .genericInput .form-control {
 .quickInfo {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+.btn {
+    position: relative;
+    padding: 5px 10px;
+    background: #03a9f4;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-left: 25%;
+    width: 50%;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
