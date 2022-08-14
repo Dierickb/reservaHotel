@@ -1,0 +1,60 @@
+{% block css %}
+    <link href="{{ url_for('static', filename='css/cardInfo.css') }}" rel="stylesheet" />
+{% endblock %}
+
+<div class="card caseInfo overflow-y">
+    <div class="card_header red">
+        <div class="tittle" justi>
+            <div class="containHeader">
+                <div class="circle">0</div>
+                <div class="idCase">
+                    <h4>
+                        Dierick Brochero
+                        </br>
+                        ID: 3124
+                    </h4>
+                </div>
+            </div>
+            <div>
+                <a href="/links/<%=url%>/edit">
+                    <i class="fas fa-edit"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card_section">
+        <p>Birthdate:
+            27/10/199
+        </p>
+    </div>
+    <div class="card_section">
+        <p>Home's Address:
+            Carrera 35#26-108
+        </p>
+    </div>
+    <div class="card_section">
+        <p>Work's address:
+            Carrera 35#26-108
+        </p>
+    </div>
+    <div class="card_section">
+        <p>Gender:
+            Masculino
+        </p>
+    </div>
+    <div class="card_section">
+        <p>Result covid:
+            Negativo
+        </p>
+    </div>
+
+    <div class="card_section">
+        <p>Current state:
+            Soltero
+        </p>
+    </div>
+    <div class="card_footer">
+        <h4>Records: State - mm/dd/yyyy</h4>
+    </div>
+</div>

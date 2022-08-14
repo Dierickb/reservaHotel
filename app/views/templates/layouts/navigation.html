@@ -2,6 +2,7 @@
     <link href="{{ url_for('static', filename='css/navigation.css') }}" rel="stylesheet" />
 {% endblock %}
 
+{% if url != "/admin" %}
 <header class="header">
     <nav class="nav">
         <a href="/" class="logo nav-link">
@@ -30,3 +31,4 @@
         </ul>
     </nav>
 </header>
+{% endif %}
