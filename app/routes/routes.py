@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session, flash
+
+from ..models.exceptions import UserNotFound, UserAlreadyExists
 from ..models.models import Login, Date, User, SignUpForm
 from ..controller import users_controller
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -42,26 +44,26 @@ def loginGet():
 
 @global_scope.route("/signin", methods=['POST'])
 def loginPost():
-    data = request.form
-    user = Login(email=data["login"], password=data["password"])
-    # user_new no es objeto sino tupla (?)
-    user_new = users_controller.validateLogin(user)
-    print(user_new)
-    # user new debería retornar el rol.
-    rol = "Admin"  # user_new[3]
-    if check_password_hash(user_new[1], user.password):
-        # la autenticación se puede realizar mediante variables de session
-        session['rol'] = rol
-        if rol == 'Admin':
-            return redirect(url_for('admin.admin'))
-        elif rol == 'SuperAdmin':
-            return redirect(url_for('admin.admin'))
-        elif rol == 'Cliente':
-            return redirect(url_for('admin.admin'))
-    else:
-        # El usuario se equivocó de contraseña
+    try:
+        data = request.form
+        user = Login(email=data["login"], password=data["password"])
+        user_new = users_controller.validateLogin(user)
+        print(user_new)
+        rol = "admin"  # user_new[3]
+        if check_password_hash(user_new[1], user.password):
+            session['rol'] = rol
+            if rol == 'admin':
+                return redirect(url_for('admin.admin'))
+            elif rol == 'superadmin':
+                return redirect(url_for('admin.admin'))
+            elif rol == 'user':
+                return redirect(url_for('admin.admin'))
+        else:
+            flash("Check your credentials and try again")
+            return render_template("register/signin.html", nav=nav)
+    except UserNotFound as err:
+        flash(err.__str__())
         return render_template("register/signin.html", nav=nav)
-
 
 @global_scope.route("/signup", methods=['GET'])
 def signupGet():
@@ -76,13 +78,18 @@ def signupGet():
 
 @global_scope.route("/signup", methods=['POST'])
 def signupPost():
-    data = request.form
-    user = User(email=data["email"], password=generate_password_hash(data["password"]),
+    try:
+        data = request.form
+        user = User(email=data["email"], password=generate_password_hash(data["password"]),
                 fullName=data["fullName"], phone=data["phone"],
                 address=data["address"], rol="Cliente")
+        user_new = users_controller.create(user)
+        return redirect(url_for('api.loginGet'))
 
-    user_new = users_controller.create(user)
-    return redirect(url_for('api.loginGet'))
+    except UserAlreadyExists as err:
+        flash(err.__str__())
+        return render_template("register/signup.html", nav=nav)
+    
 
 
 @global_scope.route("/users", methods=['GET'])
@@ -93,4 +100,8 @@ def getUsers():
 
     return jsonify(users_dict)
 
+@global_scope.route('/<rol>/logout')
+def logout(rol):
+    session.pop('rol', None)
+    return redirect(url_for('api.loginGet'))
 

@@ -7,16 +7,17 @@
             <div class="registerMenu"></div>
         </div>
 
-        <form class= "form" action="/links/register" method="POST">
+        <form class= "form" action="{{ url_for('admin.rUser') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="cardRegister">
 
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="patientName" placeholder="User fullname" autofocus />
+                    name="fullName" placeholder="User fullname" autofocus />
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="patientLastName" placeholder="Email" autofocus />
+                    name="email" placeholder="Email" autofocus />
                 </div>
 
                 <div class="form-group">
@@ -29,11 +30,11 @@
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="patientCC" placeholder="Password" autofocus />
+                    name="password" placeholder="Password" autofocus />
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="addressHome" placeholder="Address Home" autofocus />
+                    name="address" placeholder="Address Home" autofocus />
                 </div>
                 <div class="form-group">
                     <input type="date" class="form-control"
@@ -45,11 +46,11 @@
                 </div>
                 <div class=" form-group">
                     <select class="roleDropDown"
-                        name="resultCovid" autofocus  required>
+                        name="rol" autofocus  required>
                         <option value="">Rol</option>
-                        <option value="1">User</option>
-                        <option value="0">Administrator</option>
-                        <option value="0">Super administrator</option>
+                        <option value="user">User</option>
+                        <option value="admin">Administrator</option>
+                        <option value="superadmin">Super administrator</option>
                     </select>
                 </div>
 

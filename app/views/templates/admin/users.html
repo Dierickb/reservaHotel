@@ -1,6 +1,6 @@
 <div class="recentPatients">
     <div class="cardHeader">
-        <h2>Patients</h2>
+        <h2>Users</h2>
     </div>
 
     <table>
@@ -11,26 +11,28 @@
                 <td>Phone</td>
                 <td>email</td>
                 <td>Rol</td>
-                <td>Password</td>
                 <td>Photo</td>
+                <td>Password</td>
             </tr>
         </thead>
         <tbody id="tbody">
+            {% for user in users %}
             <tr>
                 <td>
                     <button class="patientState" style="background: red">
                         <a href="/" class="patientState">
-                            1
+                            {{ user.id }}
                         </a>
                     </button>
                 </td>
-                <td>Dierick Salvador Brochero Niebles</td>
-                <td>3165089884</td>
-                <td>dierickbro@gmail.com</td>
-                <td>Super admin</td>
-                <td>123456789</td>
-                <td>1</td>
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.rol }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.password }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

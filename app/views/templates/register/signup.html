@@ -9,6 +9,25 @@
 <div class="bodyContent">
     <div class="carouselContainer signin">
         <div class="cardBox">
+        {% with messages = get_flashed_messages() %}
+                
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert" role="alert">
+            <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                text: "{{message}}",
+                showConfirmButton: true,
+                timer: 5000
+            })</script>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %} 
             <div class="hg-auto card signup ovrflow-y">
 
                 <div class="cardTitle">
@@ -22,6 +41,7 @@
 
                 <div class="cardContent no-pa-l">
                     <form id="signup"  method="POST" action="{{ url_for('api.signupPost') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                         <div class="username">
                             <label for="login_field">Email address</label>
                             <input type="email" id="login_field" name="email"

@@ -18,6 +18,25 @@
         <div class="container mainContainer">
 
             {% include 'admin/userRegister.html' %}
+            {% with messages = get_flashed_messages() %}
+                
+            {% if messages %}
+            <br />
+            {% for message in messages %}
+            <div class="alert" role="alert">
+                <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: "{{message}}",
+                    showConfirmButton: true,
+                    timer: 5000
+                })</script>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% endwith %} 
 
             <div class="details">
                 {% include 'admin/userInfo.html' %}

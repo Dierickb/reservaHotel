@@ -64,14 +64,14 @@ def list_all() -> List[User]:
     return users
 
 
-def detail(user: User) -> User:
+def detail(id: str) -> User:
     query = "SELECT oid, * FROM users WHERE oid=?"
-    parameters = [user.id]
+    parameters = [id]
 
     record = _fetch_one(query, parameters)
 
     if record is None:
-        raise UserNotFound(f"No user with id: {user.id}")
+        raise UserNotFound(f"No user with id: {id}")
 
     user = User(id=record[0], email=record[1], password=record[2],
                 fullName=record[3], phone=record[4], address=record[5])

@@ -31,5 +31,5 @@ def lists() -> List[User]:
     return users_db.list_all()
 
 
-def details(contact: User) -> User:
-    return users_db.detail(contact)
+def details(id: str) -> User:
+    return users_db.detail(id)
