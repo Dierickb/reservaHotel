@@ -9,14 +9,14 @@
                 <div class="circle">0</div>
                 <div class="idCase">
                     <h4>
-                        Dierick Brochero
+                        User Info
                         </br>
                         ID: {{ user.id }}
                     </h4>
                 </div>
             </div>
             <div>
-                <a href="/links/<%=url%>/edit">
+                <a href="/admin/edit_user/{{ user.id }}" >
                     <i class="fas fa-edit"></i>
                 </a>
             </div>
@@ -45,8 +45,9 @@
     </div>
     <div class="card_footer">
         <h4>Records: State - mm/dd/yyyy</h4>
-        {% if url.split("/")[2] == "edit_user" %}
+        {% if url.split("/")[2] == "select_user" %}
             <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button class="btn btn-success btn-block">
                     <a  class="btn-primary" style="color: black">
                         Eliminar</a>

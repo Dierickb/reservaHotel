@@ -36,7 +36,7 @@ def rUser():
         return redirect(url_for('admin.admin'))
 
 
-@admin_scope.route("/edit_user/<user_id>", methods=['GET'])
+@admin_scope.route("/select_user/<user_id>", methods=['GET'])
 def get_user(user_id):
     if 'rol' in session and session['rol'] == 'admin':
         users_list = users_controller.lists()
@@ -49,10 +49,10 @@ def get_user(user_id):
         return redirect(url_for('api.loginGet'))
 
 
-@admin_scope.route("/edit_user/<user_id>", methods=['POST'])
+@admin_scope.route("/edit_user/<user_id>", methods=['POST', 'GET'])
 def edit_user(user_id):
     print("update")
-    if 'rol' in session and session['rol'] == 'admin':
+    if 'rol' in session and session['rol'] == 'admin' and request.method == 'POST':
         users_list = users_controller.lists()
         users_dict = [user._asdict() for user in users_list]
 
@@ -64,11 +64,20 @@ def edit_user(user_id):
 
         return render_template("/admin/admin.html", user=new_user,
                                url=request.path, users=users_dict)
+
+    elif 'rol' in session and session['rol'] == 'admin' and request.method == 'GET':
+        users_list = users_controller.lists()
+        users_dict = [user._asdict() for user in users_list]
+        user = users_controller.details(user_id)
+
+        return render_template("/admin/admin.html", user=user,
+                               url=request.path, users=users_dict)
+
     else:
         return redirect(url_for('api.loginGet'))
 
 
-@admin_scope.route("/edit_user/<user_id>", methods=['POST'])
+@admin_scope.route("/delete_user/<user_id>", methods=['POST'])
 def delete_user(user_id):
     try:
         if 'rol' in session and session['rol'] == 'admin':

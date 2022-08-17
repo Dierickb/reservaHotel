@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="cardContent no-pa-l">
-                    <form id="login"  method="POST" action="{{ url_for('api.loginPost[2]') }}">
+                    <form id="login"  method="POST" action="{{ url_for('api.loginPost') }}">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                        <div class="username">
                             <label for="login_field">Username or email address</label>

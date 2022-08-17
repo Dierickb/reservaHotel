@@ -48,9 +48,10 @@ def loginPost():
         data = request.form
         user = Login(email=data["login"], password=data["password"])
         user_new = users_controller.validateLogin(user)
-
+        print(user_new.rol)
         if check_password_hash(user_new.password, user.password):
             session['rol'] = user_new.rol
+            print(user_new.rol)
             if user_new.rol == 'admin':
                 print("Admin rol")
                 return redirect(url_for('admin.admin'))
@@ -62,10 +63,10 @@ def loginPost():
                 return redirect(url_for('admin.admin'))
         else:
             flash("Check your credentials and try again")
-            return render_template("register/signin.html", nav=nav)
+            return render_template("register/signin.html", nav=nav, url= request.path)
     except UserNotFound as err:
         flash(err.__str__())
-        return render_template("register/signin.html", nav=nav)
+        return render_template("register/signin.html", nav=nav, url= request.path)
 
 
 @global_scope.route("/signup", methods=['GET'])
@@ -84,13 +85,13 @@ def signupPost():
     try:
         data = request.form
         user = User(email=data["email"], password=generate_password_hash(data["password"]),
-                    fullName=data["fullName"], phone=data["phone"], rol="cliente")
+                    fullName=data["fullName"], phone=data["phone"], rol="admin")
         user_new = users_controller.create(user)
         return redirect(url_for('api.loginGet'))
 
     except UserAlreadyExists as err:
         flash(err.__str__())
-        return render_template("register/signup.html", nav=nav)
+        return render_template("register/signup.html", nav=nav, url= request.path)
 
 
 @global_scope.route("/users", methods=['GET'])
