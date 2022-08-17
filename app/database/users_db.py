@@ -28,6 +28,9 @@ def create(user: User) -> User:
 def update(user_: User) -> User:
     if not validateUser("usId", user_.id):
         raise UserNotFound("User not Found!")
+        
+    if validateUser("usCorreo", user.email):
+        raise UserAlreadyExists(f"Email {user.email} is already used")
 
     user = validateUpdate("usId", user_)
 

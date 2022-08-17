@@ -51,27 +51,32 @@ def get_user(user_id):
 
 @admin_scope.route("/edit_user/<user_id>", methods=['POST', 'GET'])
 def edit_user(user_id):
-    if 'rol' in session and session['rol'] == 'admin' and request.method == 'POST':
-        users_list = users_controller.lists()
-        users_dict = [user._asdict() for user in users_list]
-        data = request.form
-        if data["password"] == "":
+    try:
+        if 'rol' in session and session['rol'] == 'admin' and request.method == 'POST':
+            users_list = users_controller.lists()
+            users_dict = [user._asdict() for user in users_list]
+            data = request.form
+            if data["password"] == "":
+                user = users_controller.details(user_id)
+                userEdited = User(id=user_id ,email=data["email"], password=user.password,
+                            fullName=data["fullName"], phone=data["phone"], rol=data["rol"])
+                users_controller.update(userEdited)
+            return redirect(url_for('admin.admin'))
+
+        elif 'rol' in session and session['rol'] == 'admin' and request.method == 'GET':
+            users_list = users_controller.lists()
+            users_dict = [user._asdict() for user in users_list]
             user = users_controller.details(user_id)
-            userEdited = User(id=user_id ,email=data["email"], password=user.password,
-                        fullName=data["fullName"], phone=data["phone"], rol=data["rol"])
-            users_controller.update(userEdited)
+
+            return render_template("/admin/admin.html", user=user,
+                                url=request.path, users=users_dict)
+
+        else:
+            return redirect(url_for('api.loginGet'))
+    except UserAlreadyExists as err:
+        flash(err.__str__())
         return redirect(url_for('admin.admin'))
-
-    elif 'rol' in session and session['rol'] == 'admin' and request.method == 'GET':
-        users_list = users_controller.lists()
-        users_dict = [user._asdict() for user in users_list]
-        user = users_controller.details(user_id)
-
-        return render_template("/admin/admin.html", user=user,
-                               url=request.path, users=users_dict)
-
-    else:
-        return redirect(url_for('api.loginGet'))
+        
 
 
 @admin_scope.route("/delete_user/<user_id>", methods=['POST'])
