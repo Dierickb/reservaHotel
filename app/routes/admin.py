@@ -51,19 +51,16 @@ def get_user(user_id):
 
 @admin_scope.route("/edit_user/<user_id>", methods=['POST', 'GET'])
 def edit_user(user_id):
-    print("update")
     if 'rol' in session and session['rol'] == 'admin' and request.method == 'POST':
         users_list = users_controller.lists()
         users_dict = [user._asdict() for user in users_list]
-
         data = request.form
-        userEdited = User(id=user_id ,email=data["email"], password=generate_password_hash(data["password"]),
-                    fullName=data["fullName"], phone=data["phone"], rol=data["rol"])
-
-        new_user = users_controller.update(userEdited)
-
-        return render_template("/admin/admin.html", user=new_user,
-                               url=request.path, users=users_dict)
+        if data["password"] == "":
+            user = users_controller.details(user_id)
+            userEdited = User(id=user_id ,email=data["email"], password=user.password,
+                        fullName=data["fullName"], phone=data["phone"], rol=data["rol"])
+            users_controller.update(userEdited)
+        return redirect(url_for('admin.admin'))
 
     elif 'rol' in session and session['rol'] == 'admin' and request.method == 'GET':
         users_list = users_controller.lists()

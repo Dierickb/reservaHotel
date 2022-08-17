@@ -48,6 +48,7 @@
         {% if url.split("/")[2] == "select_user" %}
             <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="POST">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <br>
                 <button class="btn btn-success btn-block">
                     <a  class="btn-primary" style="color: black">
                         Eliminar</a>

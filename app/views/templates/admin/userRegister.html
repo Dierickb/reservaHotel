@@ -21,7 +21,7 @@
                     name="email" value="{{ user.email }}" autofocus />
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control"
+                    <input type="password" class="form-control"
                     name="password" placeholder="Password" autofocus />
                 </div>
                 <div class="form-group">
@@ -31,10 +31,19 @@
                 <div class=" form-group">
                     <select class="roleDropDown"
                         name="rol" autofocus  required>
-                        <option value="{{ user.rol }}">{{ user.rol }}</option>
-                        <option value="user">User</option>
-                        <option value="admin">Administrator</option>
-                        <option value="superadmin">Super administrator</option>
+                        {% if user.rol  == "admin" %}
+                            <option value="user">User</option>
+                            <option  selected="selected" value="admin">Administrator</option>
+                            <option value="superadmin">Super administrator</option>
+                        {% elif user.rol == "user" %}
+                            <option selected="selected" value="user">User</option>
+                            <option value="admin">Administrator</option>
+                            <option value="superadmin">Super administrator</option>
+                        {% elif user.rol == "superadmin" %}
+                            <option value="user">User</option>
+                            <option value="admin">Administrator</option>
+                            <option selected="selected" value="superadmin">Super administrator</option>
+                        {% endif %}
                     </select>
                 </div>
 
