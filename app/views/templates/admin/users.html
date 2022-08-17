@@ -11,8 +11,6 @@
                 <td>Phone</td>
                 <td>email</td>
                 <td>Rol</td>
-                <td>Photo</td>
-                <td>Password</td>
             </tr>
         </thead>
         <tbody id="tbody">
@@ -20,7 +18,7 @@
             <tr>
                 <td>
                     <button class="patientState" style="background: red">
-                        <a href="/" class="patientState">
+                        <a href="/admin/edit_user/{{ user.id }}" class="patientState">
                             {{ user.id }}
                         </a>
                     </button>
@@ -29,8 +27,6 @@
                 <td>{{ user.phone }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.rol }}</td>
-                <td>{{ user.id }}</td>
-                <td>{{ user.password }}</td>
             </tr>
             {% endfor %}
         </tbody>

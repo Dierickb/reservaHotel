@@ -16,5 +16,5 @@ app.register_blueprint(global_scope, url_prefix="/")
 # app.register_blueprint(errors_scope, url_prefix="/")
 app.register_blueprint(admin_scope, url_prefix="/admin")
 
-reset_table()
+#reset_table()
 reset_room_table()

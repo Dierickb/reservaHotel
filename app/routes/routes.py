@@ -48,15 +48,17 @@ def loginPost():
         data = request.form
         user = Login(email=data["login"], password=data["password"])
         user_new = users_controller.validateLogin(user)
-        print(user_new)
-        rol = "admin"  # user_new[3]
-        if check_password_hash(user_new[1], user.password):
-            session['rol'] = rol
-            if rol == 'admin':
+
+        if check_password_hash(user_new.password, user.password):
+            session['rol'] = user_new.rol
+            if user_new.rol == 'admin':
+                print("Admin rol")
                 return redirect(url_for('admin.admin'))
-            elif rol == 'superadmin':
+            elif user_new.rol == 'superadmin':
+                print("Admin rol")
                 return redirect(url_for('admin.admin'))
-            elif rol == 'user':
+            elif user_new.rol == 'cliente':
+                print("Admin rol")
                 return redirect(url_for('admin.admin'))
         else:
             flash("Check your credentials and try again")
@@ -64,6 +66,7 @@ def loginPost():
     except UserNotFound as err:
         flash(err.__str__())
         return render_template("register/signin.html", nav=nav)
+
 
 @global_scope.route("/signup", methods=['GET'])
 def signupGet():
@@ -81,15 +84,13 @@ def signupPost():
     try:
         data = request.form
         user = User(email=data["email"], password=generate_password_hash(data["password"]),
-                fullName=data["fullName"], phone=data["phone"],
-                address=data["address"], rol="Cliente")
+                    fullName=data["fullName"], phone=data["phone"], rol="cliente")
         user_new = users_controller.create(user)
         return redirect(url_for('api.loginGet'))
 
     except UserAlreadyExists as err:
         flash(err.__str__())
         return render_template("register/signup.html", nav=nav)
-    
 
 
 @global_scope.route("/users", methods=['GET'])
@@ -100,8 +101,8 @@ def getUsers():
 
     return jsonify(users_dict)
 
+
 @global_scope.route('/<rol>/logout')
 def logout(rol):
     session.pop('rol', None)
     return redirect(url_for('api.loginGet'))
-

@@ -11,7 +11,7 @@
                     <h4>
                         Dierick Brochero
                         </br>
-                        ID: 3124
+                        ID: {{ user.id }}
                     </h4>
                 </div>
             </div>
@@ -24,37 +24,34 @@
     </div>
 
     <div class="card_section">
-        <p>Birthdate:
-            27/10/199
+        <p>Name:
+            {{ user.fullName }}
         </p>
     </div>
     <div class="card_section">
-        <p>Home's Address:
-            Carrera 35#26-108
+        <p>Correo:
+            {{ user.email }}
         </p>
     </div>
     <div class="card_section">
-        <p>Work's address:
-            Carrera 35#26-108
+        <p>Número:
+            {{ user.phone }}
         </p>
     </div>
     <div class="card_section">
-        <p>Gender:
-            Masculino
-        </p>
-    </div>
-    <div class="card_section">
-        <p>Result covid:
-            Negativo
-        </p>
-    </div>
-
-    <div class="card_section">
-        <p>Current state:
-            Soltero
+        <p>Rol:
+            {{ user.rol }}
         </p>
     </div>
     <div class="card_footer">
         <h4>Records: State - mm/dd/yyyy</h4>
+        {% if url.split("/")[2] == "edit_user" %}
+            <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="POST">
+                <button class="btn btn-success btn-block">
+                    <a  class="btn-primary" style="color: black">
+                        Eliminar</a>
+                </button>
+            </form>
+        {% endif %}
     </div>
 </div>

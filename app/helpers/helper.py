@@ -56,13 +56,13 @@ def validate_user(user: User) -> None:
         raise UserNotValid("The user has no full name or email")
 
     if is_empty(user.password):
-        raise UserNotValid("The user has no full name or email")
+        raise UserNotValid("The user has no password")
 
     if is_empty(user.phone):
-        raise UserNotValid("The user has no full name or email")
+        raise UserNotValid("The user has no phone")
 
-    if is_empty(user.address):
-        raise UserNotValid("The user has no full name or email")
+    if is_empty(user.rol):
+        raise UserNotValid("The user has no rol")
 
 
 def validate_room(room: Room) -> None:

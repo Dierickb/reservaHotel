@@ -8,6 +8,7 @@ from wtforms.validators import DataRequired, Email, Length, NumberRange, InputRe
 class Login(NamedTuple):
     email: Optional[str] = None
     password: Optional[str] = None
+    rol: Optional[str] = None
 
 
 class Date(NamedTuple):
@@ -16,13 +17,12 @@ class Date(NamedTuple):
 
 
 class User(NamedTuple):
-    id: Optional[str] = None
+    id: Optional[int] = None
     email: Optional[str] = None
     password: Optional[str] = None
     fullName: Optional[str] = None
     phone: Optional[str] = None
-    address: Optional[str] = None
-    rol: Optional[str] = None
+    rol: Optional[str] = "cliente"
 
 
 class Room(NamedTuple):

@@ -5,10 +5,10 @@ from ..helpers import helper
 from ..database import users_db
 
 
-def validateLogin(user_: Login) -> bool:
+def validateLogin(user_: Login) -> Login:
     user = helper.format_login(user_)
     helper.validate_Login(user)
-    return users_db.validateLogin("email", user)
+    return users_db.validateLogin("usCorreo", user)
 
 
 def create(user_: User) -> User:
@@ -31,5 +31,5 @@ def lists() -> List[User]:
     return users_db.list_all()
 
 
-def details(id: str) -> User:
-    return users_db.detail(id)
+def details(userId: int) -> User:
+    return users_db.detail(userId)

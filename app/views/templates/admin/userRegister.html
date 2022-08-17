@@ -7,26 +7,18 @@
             <div class="registerMenu"></div>
         </div>
 
-        <form class= "form" action="{{ url_for('admin.rUser') }}" method="POST">
+        {% if url.split("/")[2] == "edit_user" %}
+        <form class="form active" action="{{ url_for('admin.edit_user', user_id=user.id ) }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="cardRegister">
 
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="fullName" placeholder="User fullname" autofocus />
+                    name="fullName" value="{{ user.fullName }}" autofocus />
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="email" placeholder="Email" autofocus />
-                </div>
-
-                <div class="form-group">
-                    <select class="roleDropDown"
-                        name="patientGender" autofocus  required>
-                        <option value="">Gender</option>
-                        <option value="2">Male</option>
-                        <option value="1">Female</option>
-                    </select>
+                    name="email" value="{{ user.email }}" autofocus />
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
@@ -34,15 +26,48 @@
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="address" placeholder="Address Home" autofocus />
+                    name="phone" value={{ user.phone }} autofocus />
                 </div>
+                <div class=" form-group">
+                    <select class="roleDropDown"
+                        name="rol" autofocus  required>
+                        <option value="{{ user.rol }}">{{ user.rol }}</option>
+                        <option value="user">User</option>
+                        <option value="admin">Administrator</option>
+                        <option value="superadmin">Super administrator</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
-                    <input type="date" class="form-control"
-                    name="patientBirthdate" autofocus />
+                    <p class=button-mb-5>
+                    <button class="btn btn-success btn-block">
+                    <a  class="btn-primary" style="color: white">
+                        Actualizar</a>
+                    </button>
+                    </p>
+                </div>
+            </div>
+        </form>
+        {% else %}
+        <form class= "form" action="{{ url_for('admin.rUser') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="cardRegister">
+
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                    name="fullName" placeholder="Fullname" autofocus />
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="addressWork" placeholder="Address" autofocus />
+                    name="email" placeholder="Email" autofocus />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                    name="password" placeholder="Password" autofocus />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                    name="phone" placeholder="Phone" autofocus />
                 </div>
                 <div class=" form-group">
                     <select class="roleDropDown"
@@ -62,10 +87,9 @@
                     </button>
                     </p>
                 </div>
-
             </div>
-
         </form>
+        {% endif %}
 
     </div>
 </div>
