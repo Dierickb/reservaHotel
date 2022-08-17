@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, jsonify, redirect, url_fo
 from ..models.models import Login, Date, User, SignUpForm
 from ..models.exceptions import UserAlreadyExists, UserNotFound
 from werkzeug.security import generate_password_hash, check_password_hash
-from ..controller import users_controller
+from ..controller import users_controller, rooms_controller
 
 admin_scope = Blueprint("admin", __name__)
 
@@ -86,3 +86,11 @@ def delete_user(user_id):
     except UserNotFound as err:
         flash(err.__str__())
         return redirect(url_for('admin.admin'))
+
+
+@admin_scope.route("/rooms", methods=['GET'])
+def rooms():
+    rooms_list = rooms_controller.lists()
+    rooms_dict = [[room.id, room.possibilities, room.typeRoom] for room in rooms_list]
+    return jsonify(rooms_dict)
+
