@@ -24,14 +24,6 @@ def home():
 
     return render_template("home.html", **parameters)
 
-
-@global_scope.route("/", methods=['POST'])
-def homePost():
-    data = request.form
-    date = Date(initDate=data["dateInit"], finalDate=data["dateFinal"])
-    return jsonify(date)
-
-
 @global_scope.route("/signin", methods=['GET'])
 def loginGet():
     parameters = {
@@ -48,19 +40,14 @@ def loginPost():
         data = request.form
         user = Login(email=data["login"], password=data["password"])
         user_new = users_controller.validateLogin(user)
-        print(user_new.rol)
         if check_password_hash(user_new.password, user.password):
             session['rol'] = user_new.rol
-            print(user_new.rol)
             if user_new.rol == 'admin':
-                print("Admin rol")
                 return redirect(url_for('admin.admin'))
             elif user_new.rol == 'superadmin':
-                print("Admin rol")
                 return redirect(url_for('admin.admin'))
-            elif user_new.rol == 'cliente':
-                print("Admin rol")
-                return redirect(url_for('admin.admin'))
+            elif user_new.rol == 'user':
+                return redirect(url_for('user.user'))
         else:
             flash("Check your credentials and try again")
             return render_template("register/signin.html", nav=nav, url= request.path)
@@ -85,7 +72,7 @@ def signupPost():
     try:
         data = request.form
         user = User(email=data["email"], password=generate_password_hash(data["password"]),
-                    fullName=data["fullName"], phone=data["phone"], rol="admin")
+                    fullName=data["fullName"], phone=data["phone"], rol="user")
         user_new = users_controller.create(user)
         return redirect(url_for('api.loginGet'))
 
