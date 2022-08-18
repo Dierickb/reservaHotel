@@ -12,26 +12,45 @@
 {% endblock %}
 
 {% block content %}
-<div class="container" style="display: none">
-    <h1>{{title}}</h1>
-    <p>{{description}}</p>
 
+{% if url.split("/")[1] == "user" %}
+<div class="container">
+    {% with messages = get_flashed_messages() %}         
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert" role="alert">
+            <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                text: "{{message}}",
+                showConfirmButton: true,
+            })</script>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+    {% endwith %} 
     <div class="dateRange" style="display: flex;">
         <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: max-content">
             <i class="fa-solid fa-calendar"></i>&nbsp;
             Deperture
             <span id="initialDatePicked"></span>
-            return
+            Return
             <span id="finalDatePicked"></span>
             <i class="fa fa-caret-down"></i>
         </div>
-        <button type="submit" form="home">Search</button>
+        <button type="submit" form="home">Reserve</button>
     </div>
-    <form id="home"  method="POST" action="{{ url_for('api.homePost') }}">
+    <form id="home"  method="POST" action="{{ url_for('user.user') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input id="dateInit" name="dateInit" type="text" readonly style="visibility: hidden">
         <input id="dateFinal" name="dateFinal" type="text" readonly style="visibility: hidden">
     </form>
 </div>
+{% endif %}
+
 
 <div class="bodyContent allWidth np-t">
     <div class="carouselContainer allWidth">
