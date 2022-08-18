@@ -90,7 +90,7 @@ def delete_user(user_id):
 
 @admin_scope.route("/rooms", methods=['GET'])
 def rooms():
-    rooms_list = rooms_controller.lists()
-    rooms_dict = [[room.id, room.possibilities, room.typeRoom] for room in rooms_list]
-    return jsonify(rooms_dict)
+    rooms_list = rooms_controller.details()
+    return render_template("/admin/admin.html", url=request.path,
+                           rooms=rooms_dict)
 

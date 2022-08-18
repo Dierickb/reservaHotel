@@ -26,14 +26,9 @@ class User(NamedTuple):
 
 
 class Room(NamedTuple):
-    id: Optional[str] = None
-    cantBathroom: Optional[int] = None
-    guests: Optional[int] = None
-    photo: Optional[BinaryIO] = None
-    typeRoom: Optional[str] = None,
-    possibilities: Optional[int] = None
-    available: Optional[int] = None
-    floor: Optional[int] = None
+    id: Optional[int] = None
+    location: Optional[str] = None
+    available: Optional[bool] = True
 
 
 class SignUpForm(FlaskForm):

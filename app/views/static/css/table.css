@@ -1,14 +1,4 @@
 /* Table */
-.details {
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  padding-top: 0;
-  display: grid;
-  grid-gap: 20px;
-  height: 80vh;
-  grid-template-columns: 1fr 2fr;
-}
 .recentPatients {
   position: relative;
   height: 78vh;
@@ -16,12 +6,11 @@
   padding: 20px;
   border-radius: 15px;
   overflow-y: auto;
-  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
 }
 .cardHeader {
   display: flex;
   align-items: flex-start;
-  height: 530;
 }
 .cardHeader h2 {
   font-weight: 600;
@@ -79,7 +68,6 @@ thead td {
   padding: 2px 4px;
   color: #fff;
   border-radius: 14px;
-  font-size: 300;
   letter-spacing: 1px;
 }
 .patientState {
@@ -100,8 +88,8 @@ thead td {
   padding: 20px;
   border-radius: 15px;
   overflow-y: auto;
-  width: (100% - 20px);
-  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  width: calc( 100% - 20px );
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
 }
 .recentCases .imgBx {
   position: relative;
@@ -122,8 +110,7 @@ thead td {
 .details-home {
   position: relative;
   width: 100%;
-  padding: 20px;
-  padding-top: 0;
+  padding: 0 20px 20px;
   display: grid;
   grid-gap: 20px;
   height: 80vh;

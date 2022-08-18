@@ -10,42 +10,40 @@ from faker import Faker
 
 
 def create(room: Room) -> Room:
-    if validateRoom("oid", room.id):
+    if validateRoom("hbId", room.id):
         raise RoomAlreadyExists(f"Room in the floor {room.id} already exist")
-
-    query = """INSERT INTO rooms VALUES (:floor, :cantBathroom, :guests, :typeRoom, 
-    :possibilities, :available, :photo)"""
+    query = """INSERT INTO HABITACIONES (hbLocaliacion, hbDisponible) 
+                VALUES (:location, :available)"""
 
     room_dict = room._asdict()
 
     id_ = _fetch_lastrow_id(query, room_dict)
 
     room_dict["id"] = id_
-    return room  # Room(**room_dict)
+    return Room(**room_dict)  # Room(**room_dict)
 
 
 def update(room: Room) -> Room:
-    if not validateRoom("oid", room.id):
+    if not validateRoom("hbId", room.id):
         raise RoomNotFound(f"The room with id {room.id} does not exist")
 
-    query = """UPDATE rooms SET floor = :floor, cantBathroom = :cantBathroom,
-                  guests = :guests, typeRoom = :typeRoom, possibilities = :possibilities, 
-                  available = :available, photo = :photo
-                WHERE oid = :oid"""
+    query = """UPDATE rooms SET hbLocalizacion = :location, 
+                                hbDisponible = :available
+                WHERE hbId = :id"""
 
     room_dict = room._asdict()
 
     id_ = _fetch_lastrow_id(query, room_dict)
 
     room_dict["id"] = id_
-    return room  # Room(**)
+    return Room(**room_dict)  # Room(**)
 
 
 def delete(room: Room) -> Room:
-    if not validateRoom("oid", room.id):
+    if not validateRoom("hbId", room.id):
         raise RoomNotFound(f"The room with id {room.id} does not exist")
 
-    query = "DELETE FROM users WHERE oid = ?"
+    query = "DELETE FROM HABITACIONES WHERE hbId = ?"
     parameters = [room.id]
 
     _fetch_none(query, parameters)
@@ -54,21 +52,19 @@ def delete(room: Room) -> Room:
 
 
 def list_all() -> List[Room]:
-    query = "SELECT oid, * FROM rooms"
+    query = "SELECT * FROM HABITACIONES"
     records = _fetch_all(query)
 
     rooms = []
     for record in records:
-        room = Room(id=record[0], floor=record[1], cantBathroom=record[2],
-                    guests=record[3], typeRoom=record[4], possibilities=record[5],
-                    available=record[6], photo=record[7])
+        room = Room(id=record[0], location=record[1], available=record[2])
         rooms.append(room)
 
     return rooms
 
 
 def detail(room: Room) -> Room:
-    query = "SELECT oid, * FROM rooms WHERE oid=?"
+    query = "SELECT * FROM HABITACIONES WHERE hbId=?"
     parameters = [room.id]
 
     record = _fetch_one(query, parameters)
@@ -76,15 +72,13 @@ def detail(room: Room) -> Room:
     if record is None:
         raise RoomNotFound(f"The room with id {room.id} does not exist")
 
-    room = Room(id=record[0], floor=record[1], cantBathroom=record[2],
-                guests=record[3], typeRoom=record[4], possibilities=record[5],
-                available=record[6], photo=record[7])
+    room = Room(id=record[0], location=record[1], available=record[2])
 
     return room
 
 
 def validateRoom(field: str, value: str | int) -> bool:
-    query = f"SELECT oid FROM rooms WHERE {field}=?"
+    query = f"SELECT hbId FROM rooms WHERE {field}=?"
     parameters = [value]
 
     record = _fetch_one(query, parameters)

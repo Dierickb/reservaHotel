@@ -12,19 +12,14 @@
                 <span class="title">Register</span></a>
         </li>
         <li>
-            <a href="#" title="Help"><span class="icon">
-                <i class="fas fa-question-circle"></i></span>
-                <span class="title">Help</span></a>
-        </li>
-        <li>
-            <a href="#" title="Settings"><span class="icon">
-                <i class="fas fa-cog"></i></span>
-                <span class="title">Settings</span></a>
+            <a href="/admin/rooms" title="Room"><span class="icon">
+                <i class="fas fa-solid fa-bed"></i></span>
+                <span class="title">Room</span></a>
         </li>
         <li>
             <a href="{{url_for('api.logout', rol=session['rol'])}}" title="Sing out"><span class="icon">
                 <i class="fas fa-sign-out-alt"></i>
-            </span><span class="title">Sing out</span></a>
+            </span><span class="title">Sign out</span></a>
         </li>
 
     </ul>

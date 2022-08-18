@@ -17,31 +17,42 @@
 
         <div class="container mainContainer">
 
-            {% include 'admin/userRegister.html' %}
-            {% with messages = get_flashed_messages() %}
-                
-            {% if messages %}
-            <br />
-            {% for message in messages %}
-            <div class="alert" role="alert">
-                <script>
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    text: "{{message}}",
-                    showConfirmButton: true,
-                    timer: 5000
-                })</script>
-            </div>
-            {% endfor %}
+            {% if url.split("/")[2] != "rooms"  %}
+                {% include 'admin/userRegister.html' %}
+            {% else %}
+                {% include 'admin/quicInfo.html' %}
             {% endif %}
 
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <br />
+                        {% for message in messages %}
+                            <div class="alert" role="alert">
+                                <script>
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'error',
+                                    text: "{{message}}",
+                                    showConfirmButton: true,
+                                    timer: 5000
+                                })</script>
+                            </div>
+                        {% endfor %}
+                {% endif %}
             {% endwith %} 
 
-            <div class="details">
-                {% include 'admin/userInfo.html' %}
-                {% include 'admin/users.html' %}
-            </div>
+            {% if url.split("/")[2] != "rooms"  %}
+                <div class="details" >
+            {% else %}
+                <div class="details" style="display: block" >
+            {% endif %}
+                    {% if url.split("/")[2] != "rooms"  %}
+                        {% include 'admin/userInfo.html' %}
+                        {% include 'admin/users.html' %}
+                    {% else %}
+                        {% include 'admin/roomInfo.html' %}
+                    {% endif %}
+                </div>
 
 
         </div>
