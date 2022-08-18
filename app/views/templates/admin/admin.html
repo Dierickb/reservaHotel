@@ -31,9 +31,8 @@
                                 <script>
                                 Swal.fire({
                                     position: 'center',
-                                    icon: 'error',
+                                    icon: 'success',
                                     text: "{{message}}",
-                                    showConfirmButton: true,
                                     timer: 5000
                                 })</script>
                             </div>
@@ -41,12 +40,12 @@
                 {% endif %}
             {% endwith %} 
 
-            {% if url.split("/")[2] != "rooms"  %}
+            {% if url.split("/")[2] != "rooms" and url.split("/")[2] != "create_rooms" %}
                 <div class="details" >
             {% else %}
                 <div class="details" style="display: block" >
             {% endif %}
-                    {% if url.split("/")[2] != "rooms"  %}
+                    {% if url.split("/")[2] != "rooms" and url.split("/")[2] != "create_rooms" %}
                         {% include 'admin/userInfo.html' %}
                         {% include 'admin/users.html' %}
                     {% else %}

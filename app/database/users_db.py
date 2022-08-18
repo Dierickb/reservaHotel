@@ -94,7 +94,7 @@ def validateUser(field: str, value: str | int) -> bool:
 
 
 def validateLogin(field: str, value: Login) -> Login:
-    query = f"SELECT usCorreo, usContrasena, usRol FROM USUARIOS WHERE {field}=?"
+    query = f"SELECT usCorreo, usContrasena, usRol, usId FROM USUARIOS WHERE {field}=?"
     parameters = [value.email]
 
     record = _fetch_one(query, parameters)
@@ -102,7 +102,7 @@ def validateLogin(field: str, value: Login) -> Login:
     if not bool(record):
         raise UserNotFound(f"User with email {value.email} was not found")
 
-    userLogIn = Login(email=record[0], password=record[1], rol=record[2])
+    userLogIn = Login(email=record[0], password=record[1], rol=record[2],id=record[3])
 
     return userLogIn
 

@@ -1,5 +1,6 @@
 <div class="topbar">
     <div class="toggle" title="Menu" onclick="toggleMenu();"></div>
+    {% if url.split("/")[2] != "rooms"  %}
 
     <div class="search" id="search">
         <div>
@@ -18,4 +19,6 @@
             <i class="fas fa-thin fa-user-secret"></i>
         </div>
     </div>
+    {% endif %}
+
 </div>

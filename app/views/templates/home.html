@@ -32,6 +32,7 @@
         {% endif %}
 
     {% endwith %} 
+    <br>
     <div class="dateRange" style="display: flex;">
         <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: max-content">
             <i class="fa-solid fa-calendar"></i>&nbsp;
@@ -41,17 +42,23 @@
             <span id="finalDatePicked"></span>
             <i class="fa fa-caret-down"></i>
         </div>
-        <button type="submit" form="home">Reserve</button>
+        <a>
+            <button type="submit" form="home">Reserve</button>
+        </a>
+
+        <a href="{{ url_for('user.cancel') }}">
+            <button type="submit" >Cancel</button>
+        </a>
+        
     </div>
     <form id="home"  method="POST" action="{{ url_for('user.user') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input id="dateInit" name="dateInit" type="text" readonly style="visibility: hidden">
         <input id="dateFinal" name="dateFinal" type="text" readonly style="visibility: hidden">
     </form>
+
 </div>
 {% endif %}
-
-
 <div class="bodyContent allWidth np-t">
     <div class="carouselContainer allWidth">
         <div class="cardBox">

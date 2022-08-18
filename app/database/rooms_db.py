@@ -12,7 +12,7 @@ from faker import Faker
 def create(room: Room) -> Room:
     if validateRoom("hbId", room.id):
         raise RoomAlreadyExists(f"Room in the floor {room.id} already exist")
-    query = """INSERT INTO HABITACIONES (hbLocaliacion, hbDisponible) 
+    query = """INSERT INTO HABITACIONES (hbLocalizacion, hbDisponible) 
                 VALUES (:location, :available)"""
 
     room_dict = room._asdict()
@@ -27,7 +27,7 @@ def update(room: Room) -> Room:
     if not validateRoom("hbId", room.id):
         raise RoomNotFound(f"The room with id {room.id} does not exist")
 
-    query = """UPDATE rooms SET hbLocalizacion = :location, 
+    query = """UPDATE HABITACIONES SET hbLocalizacion = :location, 
                                 hbDisponible = :available
                 WHERE hbId = :id"""
 
@@ -78,7 +78,7 @@ def detail(room: Room) -> Room:
 
 
 def validateRoom(field: str, value: str | int) -> bool:
-    query = f"SELECT hbId FROM rooms WHERE {field}=?"
+    query = f"SELECT hbId FROM HABITACIONES WHERE {field}=?"
     parameters = [value]
 
     record = _fetch_one(query, parameters)

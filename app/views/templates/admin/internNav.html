@@ -17,7 +17,7 @@
                 <span class="title">Room</span></a>
         </li>
         <li>
-            <a href="{{url_for('api.logout', rol=session['rol'])}}" title="Sing out"><span class="icon">
+            <a href="{{url_for('api.logout', rol=session['rol'], id=session['id_user'])}}" title="Sign out"><span class="icon">
                 <i class="fas fa-sign-out-alt"></i>
             </span><span class="title">Sign out</span></a>
         </li>

@@ -1,7 +1,7 @@
 <div class="cardBox quickInfo">
     <div class="card">
         <div>
-            <div class="numbers">222</div>
+            <div class="numbers">{{ rooms_info.Nrooms }}</div>
             <div class="cardName">Total habitaciones</div>
         </div>
         <div class="iconBox">
@@ -11,7 +11,7 @@
 
     <div class="card">
         <div>
-            <div class="numbers" id="numPos">222</div>
+            <div class="numbers" id="numPos">{{ rooms_info.NroomsO }}</div>
             <div class="cardName">Habitaciones disponibles</div>
         </div>
         <div class="iconBox">
@@ -23,11 +23,22 @@
 
     <div class="card">
         <div>
-            <div class="numbers" id="numNeg">22</div>
+            <div class="numbers" id="numNeg">{{ rooms_info.Nrooms-rooms_info.NroomsO }}</div>
             <div class="cardName">Habitaciones ocupadas</div>
         </div>
         <div class="iconBox">
             <i class="fas fa-virus-slash"  aria-hidden="true"></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div>
+            <div class="cardName">Agregar habitacion</div>
+        </div>
+        <div class="iconBox">
+            <a href="{{url_for('admin.create_room')}}">
+                <i class="fa-solid fa-plus" aria-hidden="true" ></i>
+            </a>
         </div>
     </div>
 </div>

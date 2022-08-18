@@ -42,6 +42,8 @@ def loginPost():
         user_new = users_controller.validateLogin(user)
         if check_password_hash(user_new.password, user.password):
             session['rol'] = user_new.rol
+            session['id_user'] = str(user_new.id)
+
             if user_new.rol == 'admin':
                 return redirect(url_for('admin.admin'))
             elif user_new.rol == 'superadmin':
@@ -90,7 +92,8 @@ def getUsers():
     return jsonify(users_dict)
 
 
-@global_scope.route('/<rol>/logout')
-def logout(rol):
+@global_scope.route('/<rol>/<id>/logout')
+def logout(rol,id):
     session.pop('rol', None)
+    session.pop('id', None)
     return redirect(url_for('api.loginGet'))

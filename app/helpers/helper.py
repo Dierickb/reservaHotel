@@ -37,13 +37,9 @@ def format_name(user: User) -> User:
 
 def format_room(room: Room) -> Room:
     room_dict = room._asdict()
-    room_dict["cantBathroom"] = room.cantBathroom
-    room_dict["guests"] = room.guests
-    room_dict["photo"] = room.photo
-    room_dict["typeRoom"] = room.typeRoom
-    room_dict["possibilities"] = room.possibilities
+    room_dict["location"] = room.location
+    room_dict["id"] = room.id
     room_dict["available"] = room.available
-    room_dict["floor"] = room.floor
 
     return Room(**room_dict)
 

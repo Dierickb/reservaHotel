@@ -9,6 +9,8 @@ class Login(NamedTuple):
     email: Optional[str] = None
     password: Optional[str] = None
     rol: Optional[str] = None
+    id:Optional[int] = None
+
 
 
 class Date(NamedTuple):
